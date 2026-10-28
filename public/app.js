@@ -1,6 +1,7 @@
 import { Link } from './link.js';
 import { Engine } from './player.js';
 import { pickVideo, loadVideo } from './store.js';
+import { t } from './i18n.js';
 
 const ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // no 0/O, 1/I/L
 const HUD_MS = 3000;
@@ -57,13 +58,13 @@ function home(error) {
     <div class="box">
       <div class="title">EASYSYNC</div>
       ${error ? `<div class="err">${esc(error)}</div>` : ''}
-      <button id="create" class="wide">${icon('plus-square')}CREATE ROOM</button>
+      <button id="create" class="wide">${icon('plus-square')}${t('create')}</button>
       <form id="joinform" class="row">
-        <input id="code" maxlength="4" placeholder="CODE" autocomplete="off" spellcheck="false" autocapitalize="characters">
-        <button>${icon('arrow-right')}JOIN</button>
+        <input id="code" maxlength="4" placeholder="${t('code')}" autocomplete="off" spellcheck="false" autocapitalize="characters">
+        <button>${icon('arrow-right')}${t('join')}</button>
       </form>
-      ${inPlace ? '' : '<div class="dim">TIP: CHROME OR EDGE PLAY BIG VIDEO FILES IN PLACE. THIS BROWSER COPIES THE FILE INTO ITS STORAGE FIRST.</div>'}
-      <a class="dim" href="help.html">SETUP / HELP</a>
+      ${inPlace ? '' : `<div class="dim">${t('tipChrome')}</div>`}
+      <a class="dim" href="help.html">${t('help')}</a>
     </div>`);
   $('create').onclick = () => {
     S = { room: randomCode(), host: true, delay: 0, lag: 0.03, confirmed: false };
@@ -86,19 +87,19 @@ function home(error) {
 }
 
 function roomLine() {
-  return `ROOM ${S.room} · ${S.host ? 'HOST' : 'GUEST'}${fileName ? ' · ' + esc(fileName) : ''}`;
+  return `${t('room')} ${S.room} · ${S.host ? t('host') : t('guest')}${fileName ? ' · ' + esc(fileName) : ''}`;
 }
 
 function pickScreen(error) {
   render(`
     <div class="box">
-      <div class="title">ROOM ${S.room}</div>
-      <div class="dim">${S.host ? 'HOST — YOUR VIDEO SETS THE LOOP LENGTH' : 'GUEST'}</div>
+      <div class="title">${t('room')} ${S.room}</div>
+      <div class="dim">${S.host ? t('hostNote') : t('guest')}</div>
       ${error ? `<div class="err">${esc(error)}</div>` : ''}
-      <button id="pick" class="wide">${icon('file-video')}PICK VIDEO FILE</button>
+      <button id="pick" class="wide">${icon('file-video')}${t('pick')}</button>
       <div id="progress" class="bar" hidden><div></div></div>
       <div id="progresstext" class="dim" hidden></div>
-      <button id="leave" class="wide">${icon('sign-out')}LEAVE</button>
+      <button id="leave" class="wide">${icon('sign-out')}${t('leave')}</button>
     </div>`);
   $('leave').onclick = leave;
   $('pick').onclick = async () => {
@@ -107,10 +108,10 @@ function pickScreen(error) {
       file = await pickVideo((p) => {
         $('progress').hidden = $('progresstext').hidden = false;
         $('progress').firstElementChild.style.width = `${Math.round(p * 100)}%`;
-        $('progresstext').textContent = `SAVING A COPY IN THE BROWSER ${Math.round(p * 100)}%`;
+        $('progresstext').textContent = t('saving', { p: Math.round(p * 100) });
       });
     } catch (e) {
-      if (e.name !== 'AbortError') pickScreen('COULD NOT OPEN THAT FILE');
+      if (e.name !== 'AbortError') pickScreen(t('cantOpen'));
       return;
     }
     if (!(await useFile(file))) return;
@@ -123,16 +124,12 @@ function pickScreen(error) {
 function gate(tip = true) {
   running = false;
   hideHud();
-  const tips = {
-    firefox: 'TO SKIP THIS NEXT TIME: CLICK THE ICON LEFT OF THE ADDRESS → AUTOPLAY → ALLOW AUDIO AND VIDEO.',
-    safari: 'TO SKIP THIS NEXT TIME: SAFARI → SETTINGS FOR THIS WEBSITE → AUTO-PLAY → ALLOW ALL AUTO-PLAY.',
-    chrome: 'TO SKIP THIS NEXT TIME: START CHROME IN KIOSK MODE. SEE SETUP / HELP.',
-  };
+  const tips = { firefox: t('skipFirefox'), safari: t('skipSafari'), chrome: t('skipChrome') };
   const ua = navigator.userAgent;
   const which = /Firefox/.test(ua) ? 'firefox' : /Safari/.test(ua) && !/Chrome|Chromium/.test(ua) ? 'safari' : 'chrome';
   render(`
     <div class="gate" id="gate">
-      <div class="title">${icon('play')} CLICK TO START</div>
+      <div class="title">${icon('play')} ${t('clickToStart')}</div>
       <div class="dim">${roomLine()}</div>
       ${tip ? `<div class="dim">${tips[which]}</div>` : ''}
     </div>`);
@@ -140,7 +137,7 @@ function gate(tip = true) {
     enterFullscreen();
     if (!video.src) {
       const r = await loadVideo(true);
-      if (!r.file) return r.needsClick ? gate() : pickScreen(r.missing ? `VIDEO NOT FOUND: ${r.missing}` : null);
+      if (!r.file) return r.needsClick ? gate() : pickScreen(r.missing ? t('notFound', { name: r.missing }) : null);
       if (!(await useFile(r.file, r.name))) return;
     }
     run();
@@ -193,7 +190,7 @@ function connect() {
       }
       const room = S.room;
       store.clear();
-      home(why === 'taken' ? `ROOM ${room} IS USED BY ANOTHER HOST` : `ROOM ${room} DOES NOT EXIST`);
+      home(why === 'taken' ? t('taken', { room }) : t('noRoom', { room }));
     },
   });
   engine.link = link;
@@ -211,13 +208,15 @@ function stopRoom() {
 
 async function prepareVideo() {
   render('');
+  const room = engine;
   const r = await loadVideo(false);
+  if (engine !== room) return; // left the room (e.g. it doesn't exist) meanwhile
   if (r.file) {
-    if (await useFile(r.file, r.name)) readyToStart();
+    if ((await useFile(r.file, r.name)) && engine === room) readyToStart();
   } else if (r.needsClick) {
     gate();
   } else {
-    pickScreen(r.missing ? `VIDEO NOT FOUND: ${r.missing}` : null);
+    pickScreen(r.missing ? t('notFound', { name: r.missing }) : null);
   }
 }
 
@@ -234,7 +233,7 @@ async function useFile(file, name = file.name) {
   video.onloadedmetadata = video.onerror = null;
   if (!ok || !(video.duration > 0) || !Number.isFinite(video.duration)) {
     video.removeAttribute('src');
-    pickScreen(`THIS BROWSER CANNOT PLAY ${name}`);
+    pickScreen(t('cantPlay', { name }));
     return false;
   }
   syncDuration();
@@ -249,7 +248,10 @@ function syncDuration() {
 }
 
 async function readyToStart() {
-  if ((await canAutoplay()) && isFullscreen()) run();
+  const room = engine;
+  const autoplay = await canAutoplay();
+  if (engine !== room) return;
+  if (autoplay && isFullscreen()) run();
   else gate();
 }
 

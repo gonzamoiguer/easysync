@@ -63,6 +63,7 @@ The server never streams playback. It keeps a small schedule per room:
 | `src/worker.js` | Worker + `Room` Durable Object |
 | `src/room-logic.js` | room schedule logic (shared with the test server) |
 | `public/app.js` | screens, session restore, HUD |
+| `public/i18n.js` | screen texts in English and Spanish, picked from the browser language (the HUD stays English) |
 | `public/player.js` | sync engine |
 | `public/link.js` | WebSocket + clock sync |
 | `public/store.js`, `copy-worker.js` | remembering the video file (Chrome file handle, or an OPFS copy) |

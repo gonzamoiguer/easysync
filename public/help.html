@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <style>
   html, body { overflow: auto; }
+  .page[hidden] { display: none; }
   .page { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; display: flex; flex-direction: column; gap: 14px; text-transform: none; }
   h1 { font-size: 28px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
   h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; background: #fff; color: #000; padding: 4px 8px; margin-top: 18px; align-self: flex-start; }
@@ -18,7 +19,7 @@
 </style>
 </head>
 <body>
-<div class="page">
+<div class="page" lang="en">
   <h1>easysync setup</h1>
   <a href="./">← back</a>
 
@@ -53,5 +54,44 @@
     <li>If the Wi-Fi drops, playback continues in sync on its own.</li>
   </ul>
 </div>
+<div class="page" lang="es" hidden>
+  <h1>easysync — configuración</h1>
+  <a href="./">← volver</a>
+
+  <h2>Cómo funciona</h2>
+  <ol>
+    <li>En la computadora principal: <b>Crear sala</b>. Anota el código de 4 caracteres. Elige el video. Su duración define el loop.</li>
+    <li>En cada una de las otras computadoras: escribe el código, <b>Unirse</b>, y elige el video de esa computadora.</li>
+    <li>Un clic para empezar. Todo se repite en loop para siempre, sincronizado.</li>
+    <li>La próxima vez que abras el sitio, cada computadora vuelve sola a su sala y a su video.</li>
+  </ol>
+  <p>Mueve el mouse para ver los controles. Teclas: <code>espacio</code> pausa, <code>← →</code> saltar 5 s, <code>R</code> reiniciar a todos (solo la computadora principal), <code>F</code> pantalla completa, <code>[ ]</code> retraso ±10 ms (con shift ±1 ms).</p>
+  <p>Si una pantalla se ve un poco adelantada o atrasada (un televisor lento, altavoces externos), ajusta su <b>retraso</b> (DELAY) hasta que coincida.</p>
+
+  <h2>Mejor navegador</h2>
+  <p>Chrome o Edge. Reproducen el video directo desde el disco, así que funcionan archivos de cualquier tamaño. Firefox y Safari también funcionan, pero primero copian el video al almacenamiento del navegador (hace falta espacio libre del tamaño del video).</p>
+
+  <h2>Saltar la pantalla "clic para empezar"</h2>
+  <p>Los navegadores piden un clic antes de reproducir con sonido en pantalla completa. Para que arranque solo (por ejemplo después de un corte de luz), abre el sitio en modo kiosco:</p>
+  <p><b>Windows</b> — crea un acceso directo con este destino (ponlo en la carpeta Inicio para que arranque al encender):</p>
+  <pre>"C:\Program Files\Google\Chrome\Application\chrome.exe" --kiosk --autoplay-policy=no-user-gesture-required https://TU-SITIO.workers.dev</pre>
+  <p><b>Mac</b> — ejecuta esto en Terminal (o guárdalo como app de Automator y agrégalo a Ítems de inicio):</p>
+  <pre>open -na "Google Chrome" --args --kiosk --autoplay-policy=no-user-gesture-required https://TU-SITIO.workers.dev</pre>
+  <p>Para salir del modo kiosco: <code>Alt+F4</code> (Windows) o <code>Cmd+Q</code> (Mac).</p>
+  <p>Chrome puede pedir una vez permiso para leer el archivo de video. Elige <b>Permitir en cada visita</b>.</p>
+  <p><b>Firefox</b>: clic en el ícono a la izquierda de la dirección → Reproducción automática → <i>Permitir audio y video</i>, y F11 para pantalla completa. <b>Safari</b>: Safari → Ajustes de este sitio web → Reproducción automática → <i>Permitir toda la reproducción automática</i>.</p>
+
+  <h2>Checklist para la exhibición</h2>
+  <ul>
+    <li>Desactiva la suspensión y el protector de pantalla en todas las computadoras.</li>
+    <li>Desactiva las notificaciones del sistema (No molestar / Concentración).</li>
+    <li>El Wi-Fi solo se usa para sincronizar. El video se reproduce desde cada computadora.</li>
+    <li>Si se corta el Wi-Fi, la reproducción sigue sincronizada sola.</li>
+  </ul>
+</div>
+<script type="module">
+  import { lang } from './i18n.js';
+  for (const el of document.querySelectorAll('.page')) el.hidden = el.lang !== lang;
+</script>
 </body>
 </html>
