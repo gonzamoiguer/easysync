@@ -59,11 +59,8 @@ This keeps costs close to zero. It also keeps the show running if the Wi-Fi drop
 
 ## 3. Local video file and auto-restore
 
-- **Pick a file** with `<input type=file>` or `showOpenFilePicker`.
-- **Copy the file once into the Origin Private File System (OPFS).** This is browser storage for the site, so it needs no permission prompt. The quota is large: in Chrome, up to about 60% of the disk.
-  - On the next visit the app opens the file straight from OPFS.
-  - It works in Chrome, Edge, Firefox and Safari.
-  - The copy shows a thin progress bar and happens only once.
+- **Chrome / Edge:** pick the file with `showOpenFilePicker` and keep the file handle in IndexedDB. The file is read in place, so any size works. Chrome can grant read access "on every visit"; otherwise the CLICK TO START click re-grants it.
+- **Firefox / Safari:** these have no file handles, so the app copies the file once into the Origin Private File System (OPFS), the site's private storage. A worker does the copy and shows a progress bar.
 - `localStorage` saves `{room, role, clientId, offsetMs}`. Visiting the site again rejoins the room and starts playing on schedule.
 - **Autoplay and fullscreen** both need a user click, unless the browser runs in kiosk mode. For exhibitions we document a launch command:
   ```
@@ -89,7 +86,7 @@ This keeps costs close to zero. It also keeps the show running if the Wi-Fi drop
   - It serves the static front end through Workers Static Assets.
   - It routes `/ws/:room` to a **Durable Object per room**, using the **WebSocket Hibernation API**: idle sockets cost no compute time.
   - Durable Objects with SQLite storage are available on the Workers Free plan.
-- **Front end:** plain TypeScript and Vite, with no framework, plus `@phosphor-icons/web`.
+- **Front end:** plain JavaScript modules with no build step and no framework, plus `@phosphor-icons/web` from a CDN.
 - **Tooling:** `wrangler`. Deploy with `npx wrangler deploy`, which gives a `*.workers.dev` URL. A custom domain is optional.
 - **Cost estimate:** a 10-machine room uses roughly 10 × (8 + 3 per 5 min) pings, which is about 3.6k messages a day.
   - Durable Objects bill incoming WebSocket messages at a 20:1 ratio against requests, so this is under 200 billed requests a day.
@@ -103,5 +100,11 @@ This keeps costs close to zero. It also keeps the show running if the Wi-Fi drop
 4. Overlay controls: pause, seek, reset, offset.
 5. Kiosk-mode setup notes, then a test on 2–3 machines. To measure sync, film all the screens playing a video with a frame counter and compare the counters.
 
-## 7. Open questions
-See the chat or the PR discussion. The answers change §3 (which browser), §1 (loop behaviour) and §4 (controls).
+## 7. Decisions (from Q&A)
+- **Videos:** the same file or different files on each computer. The host's length sets the loop. Shorter files go black until the loop restarts; longer files are cut off.
+- **Browsers:** Chrome and Edge are best: the file is read in place through a saved file handle. Firefox and Safari copy the file into OPFS once. The home screen recommends Chrome when it is missing.
+- **Kiosk mode can't be detected directly.** Instead the app checks the two things that matter: the window already covers the screen, and autoplay with sound is allowed. If both are true it starts with no click. Otherwise it shows a full-screen CLICK TO START.
+- **Loops:** forever, with no gap. The host loops on its own too.
+- **Sound:** every computer plays its own video's sound.
+- **Controls:** moving the mouse shows the HUD, a hard cut with no fade. It hides 3 s after the last movement. Brutalist black blocks, Datatype font, Phosphor bold icons.
+- **Domain:** `*.workers.dev`.

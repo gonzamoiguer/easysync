@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>easysync — setup</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  html, body { overflow: auto; }
+  .page { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; display: flex; flex-direction: column; gap: 14px; text-transform: none; }
+  h1 { font-size: 28px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+  h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; background: #fff; color: #000; padding: 4px 8px; margin-top: 18px; align-self: flex-start; }
+  code, pre { font: inherit; background: #000; border: 2px solid #fff; padding: 2px 6px; }
+  pre { padding: 10px; white-space: pre-wrap; word-break: break-all; }
+  ol, ul { padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+  a { color: #fff; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>easysync setup</h1>
+  <a href="./">← back</a>
+
+  <h2>How it works</h2>
+  <ol>
+    <li>On the main computer: <b>Create room</b>. Write down the 4-letter code. Pick the video. Its length sets the loop.</li>
+    <li>On every other computer: type the code, <b>Join</b>, pick that computer's video.</li>
+    <li>Click once to start. Everything loops forever, in sync.</li>
+    <li>Next time you open the site, each computer goes straight back to its room and video.</li>
+  </ol>
+  <p>Move the mouse to show controls. Keys: <code>space</code> pause, <code>← →</code> jump 5 s, <code>R</code> restart everyone (main computer only), <code>F</code> fullscreen, <code>[ ]</code> delay ±10 ms (hold shift for ±1 ms).</p>
+  <p>If one screen looks a little late or early (slow TV, external speakers), adjust its <b>delay</b> until it matches.</p>
+
+  <h2>Best browser</h2>
+  <p>Chrome or Edge. They play the video straight from your disk, so files of any size work. Firefox and Safari work too, but they first copy the video into the browser's storage (needs free disk space the size of the video).</p>
+
+  <h2>Skip the "click to start" screen</h2>
+  <p>Browsers need one click before playing sound fullscreen. To start fully automatically (for example after a power cut), open the site in kiosk mode:</p>
+  <p><b>Windows</b> — make a shortcut with this target (put it in the Startup folder to run at boot):</p>
+  <pre>"C:\Program Files\Google\Chrome\Application\chrome.exe" --kiosk --autoplay-policy=no-user-gesture-required https://YOUR-SITE.workers.dev</pre>
+  <p><b>Mac</b> — run in Terminal (or save as an Automator app and add it to Login Items):</p>
+  <pre>open -na "Google Chrome" --args --kiosk --autoplay-policy=no-user-gesture-required https://YOUR-SITE.workers.dev</pre>
+  <p>To exit kiosk mode: <code>Alt+F4</code> (Windows) or <code>Cmd+Q</code> (Mac).</p>
+  <p>Chrome may ask once for permission to read the video file. Choose <b>Allow on every visit</b>.</p>
+  <p><b>Firefox</b>: click the icon left of the address → Autoplay → <i>Allow Audio and Video</i>, and press F11 for fullscreen. <b>Safari</b>: Safari → Settings for this website → Auto-Play → <i>Allow All Auto-Play</i>.</p>
+
+  <h2>Exhibition checklist</h2>
+  <ul>
+    <li>Turn off sleep / screen saver on every computer.</li>
+    <li>Turn off OS notifications (Do Not Disturb / Focus).</li>
+    <li>All computers need Wi-Fi only for sync. The video plays from the computer itself.</li>
+    <li>If the Wi-Fi drops, playback continues in sync on its own.</li>
+  </ul>
+</div>
+</body>
+</html>
