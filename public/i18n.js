@@ -25,6 +25,7 @@ const strings = {
     skipChrome: 'TO SKIP THIS NEXT TIME: START CHROME IN KIOSK MODE. SEE SETUP / HELP.',
     taken: 'ROOM {room} IS USED BY ANOTHER HOST',
     noRoom: 'ROOM {room} DOES NOT EXIST',
+    or: 'OR',
   },
   es: {
     create: 'CREAR SALA',
@@ -48,6 +49,7 @@ const strings = {
     skipChrome: 'PARA SALTAR ESTO LA PRÓXIMA VEZ: INICIA CHROME EN MODO KIOSCO. VER CONFIGURACIÓN / AYUDA.',
     taken: 'LA SALA {room} ESTÁ EN USO POR OTRO ANFITRIÓN',
     noRoom: 'LA SALA {room} NO EXISTE',
+    or: 'Ó',
   },
 };
 

@@ -9,10 +9,10 @@
 <style>
   html, body { overflow: auto; }
   .page[hidden] { display: none; }
-  .page { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; display: flex; flex-direction: column; gap: 14px; text-transform: none; }
-  h1 { font-size: 28px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
-  h2 { font-size: 16px; font-weight: 900; text-transform: uppercase; background: #fff; color: #000; padding: 4px 8px; margin-top: 18px; align-self: flex-start; }
-  code, pre { font: inherit; background: #000; border: 2px solid #fff; padding: 2px 6px; }
+  .page { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; display: flex; flex-direction: column; gap: 14px; text-transform: none; line-height: 1.6; }
+  h1 { font-size: 28px; letter-spacing: 0.1em; text-transform: uppercase; }
+  h2 { font-size: 16px; text-transform: uppercase; background: #fff; color: #000; padding: 4px 8px; margin-top: 18px; align-self: flex-start; }
+  code, pre { font: inherit; background: #000; border: 1px solid #fff; padding: 1px 4px; }
   pre { padding: 10px; white-space: pre-wrap; word-break: break-all; }
   ol, ul { padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
   a { color: #fff; }
@@ -30,6 +30,7 @@
     <li>Click once to start. Everything loops forever, in sync.</li>
     <li>Next time you open the site, each computer goes straight back to its room and video.</li>
   </ol>
+  <h2>Keyboard shortcuts</h2>
   <p>Move the mouse to show controls. Keys: <code>space</code> pause, <code>← →</code> jump 5 s, <code>R</code> restart everyone (main computer only), <code>F</code> fullscreen, <code>[ ]</code> delay ±10 ms (hold shift for ±1 ms).</p>
   <p>If one screen looks a little late or early (slow TV, external speakers), adjust its <b>delay</b> until it matches.</p>
 
@@ -53,6 +54,18 @@
     <li>All computers need Wi-Fi only for sync. The video plays from the computer itself.</li>
     <li>If the Wi-Fi drops, playback continues in sync on its own.</li>
   </ul>
+
+  <h2>Offline mode (advanced)</h2>
+  <p>You can run easysync without an internet connection, but it needs to be set up beforehand and all computers must share a network.</p>
+  <p>You can create a network with an ad-hoc Wi-Fi network or a Wi-Fi router, even without an internet connection.</p>
+  <p>Download the <a href="https://github.com/easysync/easysync" target="_blank" rel="noopener noreferrer">easysync</a> source code. Install <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a>. In a terminal, run <code>npm install</code> and <code>npm run dev</code>.</p>
+
+  <hr>
+  <p><a href="https://github.com/easysync/easysync" target="_blank" rel="noopener noreferrer">easysync</a> made with 
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 18 18"><defs><linearGradient id="be262aa0-1e96-4515-9b80-c7d70e614118" x1="9" y1="16.573" x2="9" y2="1.427" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" /><stop offset="0.82" stop-color="#fff" /></linearGradient><linearGradient id="b1eb80a0-ef92-42a3-af43-f22c07fe7d9c" x1="9" y1="16.525" x2="9" y2="1.427" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" /><stop offset="0.82" stop-color="#fff" /></linearGradient></defs><title>love</title><g id="f1ad3e33-de4b-4fca-85f1-c9a05025345f"><g><path d="M9,16.573c7.7-5.518,7.96-8.737,8-9.745.048-1.409-.149-5.1-3.866-5.386A4.023,4.023,0,0,0,9,4.132a4.023,4.023,0,0,0-4.129-2.69C1.154,1.733.957,5.419,1,6.828c.035,1.008.294,4.227,8,9.745" fill="url(#be262aa0-1e96-4515-9b80-c7d70e614118)" /><path d="M17,6.828c.048-1.409-.149-5.1-3.866-5.386A4.023,4.023,0,0,0,9,4.132a4.023,4.023,0,0,0-4.129-2.69C1.154,1.733.957,5.419,1,6.828c.035,1.008.227,4.179,7.928,9.7" fill="url(#b1eb80a0-ef92-42a3-af43-f22c07fe7d9c)" /></g></g></svg>
+    and 
+    <svg fill="#fff" role="img" width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Claude</title><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>
+    by <a href="https://gonzamoiguer.com/" target="_blank" rel="noopener noreferrer">Gonzalo Moiguer</a>.</p>
 </div>
 <div class="page" lang="es" hidden>
   <h1>easysync — configuración</h1>
@@ -60,25 +73,26 @@
 
   <h2>Cómo funciona</h2>
   <ol>
-    <li>En la computadora principal: <b>Crear sala</b>. Anota el código de 4 caracteres. Elige el video. Su duración define el loop.</li>
-    <li>En cada una de las otras computadoras: escribe el código, <b>Unirse</b>, y elige el video de esa computadora.</li>
+    <li>En la computadora principal: <b>Crear sala</b>. Anotá el código de 4 caracteres. Elegí el video. Su duración define el loop.</li>
+    <li>En cada una de las otras computadoras: escribí el código de 4 caracteres, <b>Unirse</b>, y elegí el video de esa computadora.</li>
     <li>Un clic para empezar. Todo se repite en loop para siempre, sincronizado.</li>
     <li>La próxima vez que abras el sitio, cada computadora vuelve sola a su sala y a su video.</li>
   </ol>
-  <p>Mueve el mouse para ver los controles. Teclas: <code>espacio</code> pausa, <code>← →</code> saltar 5 s, <code>R</code> reiniciar a todos (solo la computadora principal), <code>F</code> pantalla completa, <code>[ ]</code> retraso ±10 ms (con shift ±1 ms).</p>
-  <p>Si una pantalla se ve un poco adelantada o atrasada (un televisor lento, altavoces externos), ajusta su <b>retraso</b> (DELAY) hasta que coincida.</p>
+  <h2>Teclas / Atajos</h2>
+  <p>Mové el mouse para ver los controles. Teclas: <code>espacio</code> pausa, <code>← →</code> saltar 5 s, <code>R</code> reiniciar a todos (solo la computadora principal), <code>F</code> pantalla completa, <code>[ ]</code> retraso ±10 ms (con shift ±1 ms).</p>
+  <p>Si una pantalla se ve un poco adelantada o atrasada (un televisor lento, altavoces externos), ajustá su <b>retraso</b> (DELAY) hasta que coincida.</p>
 
-  <h2>Mejor navegador</h2>
+  <h2>Navegador</h2>
   <p>Chrome o Edge. Reproducen el video directo desde el disco, así que funcionan archivos de cualquier tamaño. Firefox y Safari también funcionan, pero primero copian el video al almacenamiento del navegador (hace falta espacio libre del tamaño del video).</p>
 
   <h2>Saltar la pantalla "clic para empezar"</h2>
-  <p>Los navegadores piden un clic antes de reproducir con sonido en pantalla completa. Para que arranque solo (por ejemplo después de un corte de luz), abre el sitio en modo kiosco:</p>
-  <p><b>Windows</b> — crea un acceso directo con este destino (ponlo en la carpeta Inicio para que arranque al encender):</p>
+  <p>Los navegadores piden un clic antes de reproducir con sonido en pantalla completa. Para que arranque solo (por ejemplo después de un corte de luz), abrí el sitio en modo kiosco:</p>
+  <p><b>Windows</b> — crea un acceso directo con este destino (ponelo en la carpeta Inicio para que arranque al encender):</p>
   <pre>"C:\Program Files\Google\Chrome\Application\chrome.exe" --kiosk --autoplay-policy=no-user-gesture-required https://TU-SITIO.workers.dev</pre>
-  <p><b>Mac</b> — ejecuta esto en Terminal (o guárdalo como app de Automator y agrégalo a Ítems de inicio):</p>
+  <p><b>Mac</b> — ejecutá esto en Terminal (o guardalo como app de Automator y agragalo a Ítems de inicio):</p>
   <pre>open -na "Google Chrome" --args --kiosk --autoplay-policy=no-user-gesture-required https://TU-SITIO.workers.dev</pre>
   <p>Para salir del modo kiosco: <code>Alt+F4</code> (Windows) o <code>Cmd+Q</code> (Mac).</p>
-  <p>Chrome puede pedir una vez permiso para leer el archivo de video. Elige <b>Permitir en cada visita</b>.</p>
+  <p>Chrome puede pedir una vez permiso para leer el archivo de video. Elegí <b>Permitir en cada visita</b>.</p>
   <p><b>Firefox</b>: clic en el ícono a la izquierda de la dirección → Reproducción automática → <i>Permitir audio y video</i>, y F11 para pantalla completa. <b>Safari</b>: Safari → Ajustes de este sitio web → Reproducción automática → <i>Permitir toda la reproducción automática</i>.</p>
 
   <h2>Checklist para la exhibición</h2>
@@ -88,6 +102,20 @@
     <li>El Wi-Fi solo se usa para sincronizar. El video se reproduce desde cada computadora.</li>
     <li>Si se corta el Wi-Fi, la reproducción sigue sincronizada sola.</li>
   </ul>
+
+  <h2>Modo offline (avanzado)</h2>
+  <p>Es posible correrlo sin conexión a internet, pero es necesario setearlo de antes y tener una red compartida en todas las computadoras.</p>
+  <p>La red se puede hacer mediante una red wifi Ad-hoc o llevando un router wifi, aún sin conexión a internet.</p>
+  <p>Descargar el código fuente de <a href="https://github.com/easysync/easysync" target="_blank" rel="noopener noreferrer">easysync</a>. Instalá <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a>. En una terminal ejecutá <code>npm install</code> y <code>npm run dev</code>.</p>
+
+  <hr>
+  <p><a href="https://github.com/easysync/easysync" target="_blank" rel="noopener noreferrer">easysync</a> creado con
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 18 18"><defs><linearGradient id="be262aa0-1e96-4515-9b80-c7d70e614118" x1="9" y1="16.573" x2="9" y2="1.427" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" /><stop offset="0.82" stop-color="#fff" /></linearGradient><linearGradient id="b1eb80a0-ef92-42a3-af43-f22c07fe7d9c" x1="9" y1="16.525" x2="9" y2="1.427" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" /><stop offset="0.82" stop-color="#fff" /></linearGradient></defs><title>amor</title><g id="f1ad3e33-de4b-4fca-85f1-c9a05025345f"><g><path d="M9,16.573c7.7-5.518,7.96-8.737,8-9.745.048-1.409-.149-5.1-3.866-5.386A4.023,4.023,0,0,0,9,4.132a4.023,4.023,0,0,0-4.129-2.69C1.154,1.733.957,5.419,1,6.828c.035,1.008.294,4.227,8,9.745" fill="url(#be262aa0-1e96-4515-9b80-c7d70e614118)" /><path d="M17,6.828c.048-1.409-.149-5.1-3.866-5.386A4.023,4.023,0,0,0,9,4.132a4.023,4.023,0,0,0-4.129-2.69C1.154,1.733.957,5.419,1,6.828c.035,1.008.227,4.179,7.928,9.7" fill="url(#b1eb80a0-ef92-42a3-af43-f22c07fe7d9c)" /></g></g></svg>
+    y
+    <svg fill="#fff" role="img" width="12" height="12" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Claude</title><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>
+    por
+    <a href="https://gonzamoiguer.com/" target="_blank" rel="noopener noreferrer">Gonzalo Moiguer</a></p>
 </div>
 <script type="module">
   import { lang } from './i18n.js';

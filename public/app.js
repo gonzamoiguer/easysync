@@ -59,6 +59,7 @@ function home(error) {
       <div class="title">EASYSYNC</div>
       ${error ? `<div class="err">${esc(error)}</div>` : ''}
       <button id="create" class="wide">${icon('plus-square')}${t('create')}</button>
+      <div class="separator"><div class="line"></div><span>${t('or')}</span><div class="line"></div></div>
       <form id="joinform" class="row">
         <input id="code" maxlength="4" placeholder="${t('code')}" autocomplete="off" spellcheck="false" autocapitalize="characters">
         <button>${icon('arrow-right')}${t('join')}</button>
@@ -93,7 +94,7 @@ function roomLine() {
 function pickScreen(error) {
   render(`
     <div class="box">
-      <div class="title">${t('room')} ${S.room}</div>
+      <div class="title">${t('room')} <b>${S.room}</b></div>
       <div class="dim">${S.host ? t('hostNote') : t('guest')}</div>
       ${error ? `<div class="err">${esc(error)}</div>` : ''}
       <button id="pick" class="wide">${icon('file-video')}${t('pick')}</button>
@@ -344,7 +345,7 @@ const fmt = (s) => {
 function buildHud() {
   hud.innerHTML = `
     <div class="row">
-      <span class="cell inv">ROOM ${S.room}</span>
+      <span class="cell inv">ROOM <strong>${S.room}</strong></span>
       <span class="cell">${S.host ? 'HOST' : 'GUEST'}</span>
       <span class="cell" id="h-peers"></span>
       <span class="cell" id="h-net"></span>
