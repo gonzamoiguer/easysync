@@ -1,13 +1,14 @@
 # easysync
 
-Plays local video files on several computers in exact sync, looping forever. Built for exhibitions: a black screen with no visible interface while it plays.
+Plays local video or audio files on several computers in exact sync, looping forever. Built for exhibitions: a black screen with no visible interface while it plays.
 
-- One computer **creates** a room and gets a 4-character code. Its video length sets the loop.
-- The others **join** with the code. Each one plays its own video. It can be the same file or a different one.
-  - A video shorter than the host's shows black until the loop restarts.
-  - A video longer than the host's is cut off when the loop restarts.
+- One computer **creates** a room and gets a 4-character code. Its file's length sets the loop.
+- The others **join** with the code. Each one plays its own file. It can be the same file or a different one, video or audio.
+  - Audio files play over a black screen. Any format Chrome plays works: MP3, WAV, FLAC, OGG/Vorbis, Opus, AAC/M4A.
+  - A file shorter than the host's shows black until the loop restarts.
+  - A file longer than the host's is cut off when the loop restarts.
 - Anyone can pause or scrub. Only the host can **reset**, which restarts everyone.
-- Opening the site again restores the room and the video automatically.
+- Opening the site again restores the room and the file automatically.
 
 User instructions are in [`public/help.html`](public/help.html), shown on the site as SETUP / HELP.
 
@@ -45,7 +46,7 @@ The server never streams playback. It keeps a small schedule per room:
 
 1. **Clock.** Each computer measures its clock offset to the server with NTP-style pings: 8 on connect, then 4 every 3 minutes. It keeps the ping with the shortest round trip.
 2. **Schedule.** Pause, play, seek and reset each produce a new schedule. Playback is held 1 s in the future so every computer can seek ahead of time and call `play()` at the same moment.
-3. **Drift.** Each computer compares the frame on screen (`requestVideoFrameCallback`) with the schedule. Small errors are fixed by speeding up or slowing down by a few percent. Errors over 0.5 s cause a re-seek.
+3. **Drift.** Each computer compares the frame on screen (`requestVideoFrameCallback`) with the schedule. Audio-only files have no frames, so they use `currentTime` instead. Small errors are fixed by speeding up or slowing down by a few percent. Errors over 0.5 s cause a re-seek.
    - Each machine learns its own `play()` start delay and loop-restart delay, and stores them.
 4. **Loops** need no network at all, so playback keeps going in sync if the Wi-Fi drops.
 
@@ -66,7 +67,7 @@ The server never streams playback. It keeps a small schedule per room:
 | `public/i18n.js` | screen texts in English and Spanish, picked from the browser language (the HUD stays English) |
 | `public/player.js` | sync engine |
 | `public/link.js` | WebSocket + clock sync |
-| `public/store.js`, `copy-worker.js` | remembering the video file (Chrome file handle, or an OPFS copy) |
+| `public/store.js`, `copy-worker.js` | remembering the media file (Chrome file handle, or an OPFS copy) |
 | `test/dev-server.mjs` | local stand-in for the Worker, with optional simulated network jitter |
 
 ## Local testing
