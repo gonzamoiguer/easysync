@@ -1,6 +1,6 @@
 # easysync — plan
 
-Play local video files on several computers at exactly the same time. Built for exhibitions: black screen, no visible UI while playing, restores itself after a reboot.
+Play local video (or audio) files on several computers at exactly the same time. Built for exhibitions: black screen, no visible UI while playing, restores itself after a reboot.
 
 ## 1. Main idea: share a clock and a schedule, not a stream of playback updates
 
@@ -106,5 +106,6 @@ This keeps costs close to zero. It also keeps the show running if the Wi-Fi drop
 - **Kiosk mode can't be detected directly.** Instead the app checks the two things that matter: the window already covers the screen, and autoplay with sound is allowed. If both are true it starts with no click. Otherwise it shows a full-screen CLICK TO START.
 - **Loops:** forever, with no gap. The host loops on its own too.
 - **Sound:** every computer plays its own video's sound.
+- **Audio files** (added later): handled exactly like videos, using the same `<video>` element, which shows black for audio. Any format Chrome plays is accepted. Audio has no frame callbacks, so drift is measured with `currentTime`.
 - **Controls:** moving the mouse shows the HUD, a hard cut with no fade. It hides 3 s after the last movement. Brutalist black blocks, Datatype font, Phosphor bold icons.
 - **Domain:** `*.workers.dev`.

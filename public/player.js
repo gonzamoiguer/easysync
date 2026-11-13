@@ -103,6 +103,8 @@ export class Engine {
     if (this.armed) {
       // A scheduled start is pending or just fired; leave it alone for a moment.
       if (!this.armed.fired || t < this.armed.at + 300) return;
+      // Audio-only: take the start-delay sample here, there are no frame callbacks.
+      if (!v.videoWidth && !v.paused) this.measure(v.currentTime, this.link.now());
       this.armed = null;
     }
 
@@ -144,7 +146,8 @@ export class Engine {
     }
 
     this.show(true);
-    if (!('requestVideoFrameCallback' in v)) this.measure(v.currentTime, this.link.now());
+    // Audio-only files have no frames, so frame callbacks never fire: use currentTime.
+    if (!('requestVideoFrameCallback' in v) || !v.videoWidth) this.measure(v.currentTime, this.link.now());
     this.correct();
   }
 

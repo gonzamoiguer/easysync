@@ -97,7 +97,7 @@ function pickScreen(error) {
       <div class="title">${t('room')} <b>${S.room}</b></div>
       <div class="dim">${S.host ? t('hostNote') : t('guest')}</div>
       ${error ? `<div class="err">${esc(error)}</div>` : ''}
-      <button id="pick" class="wide">${icon('file-video')}${t('pick')}</button>
+      <button id="pick" class="wide">${icon('file')}${t('pick')}</button>
       <div id="progress" class="bar" hidden><div></div></div>
       <div id="progresstext" class="dim" hidden></div>
       <button id="leave" class="wide">${icon('sign-out')}${t('leave')}</button>
@@ -116,7 +116,7 @@ function pickScreen(error) {
       return;
     }
     if (!(await useFile(file))) return;
-    // A host picking a new video restarts the loop for everyone.
+    // A host picking a new file restarts the loop for everyone.
     if (S.host) link.send({ t: 'reset' });
     readyToStart();
   };
@@ -221,7 +221,7 @@ async function prepareVideo() {
   }
 }
 
-// Loads a File into the <video>. Returns false (and shows the picker) if it can't play.
+// Loads a video or audio File into the <video> element (audio plays over black). Returns false (and shows the picker) if it can't play.
 async function useFile(file, name = file.name) {
   if (objectUrl) URL.revokeObjectURL(objectUrl);
   objectUrl = URL.createObjectURL(file);
@@ -362,7 +362,7 @@ function buildHud() {
       <button id="h-dminus" title="[">-10</button>
       <span class="cell" id="h-delay"></span>
       <button id="h-dplus" title="]">+10</button>
-      <button id="h-file">${icon('file-video')}VIDEO</button>
+      <button id="h-file">${icon('file')}FILE</button>
       <button id="h-fs" title="F">${icon('corners-out')}FULLSCREEN</button>
       <button id="h-leave">${icon('sign-out')}LEAVE</button>
     </div>`;

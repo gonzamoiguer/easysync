@@ -25,17 +25,18 @@
 
   <h2>How it works</h2>
   <ol>
-    <li>On the main computer: <b>Create room</b>. Write down the 4-letter code. Pick the video. Its length sets the loop.</li>
-    <li>On every other computer: type the code, <b>Join</b>, pick that computer's video.</li>
+    <li>On the main computer: <b>Create room</b>. Write down the 4-letter code. Pick the video or audio file. Its length sets the loop.</li>
+    <li>On every other computer: type the code, <b>Join</b>, pick that computer's file (video or audio).</li>
     <li>Click once to start. Everything loops forever, in sync.</li>
-    <li>Next time you open the site, each computer goes straight back to its room and video.</li>
+    <li>Next time you open the site, each computer goes straight back to its room and file.</li>
   </ol>
+  <p>Audio files work exactly like videos: they play in sync over a black screen. Any format Chrome plays works (MP3, WAV, FLAC, OGG, Opus, AAC / M4A). You can mix video and audio computers in the same room.</p>
   <h2>Keyboard shortcuts</h2>
   <p>Move the mouse to show controls. Keys: <code>space</code> pause, <code>← →</code> jump 5 s, <code>R</code> restart everyone (main computer only), <code>F</code> fullscreen, <code>[ ]</code> delay ±10 ms (hold shift for ±1 ms).</p>
   <p>If one screen looks a little late or early (slow TV, external speakers), adjust its <b>delay</b> until it matches.</p>
 
   <h2>Best browser</h2>
-  <p>Chrome or Edge. They play the video straight from your disk, so files of any size work. Firefox and Safari work too, but they first copy the video into the browser's storage (needs free disk space the size of the video).</p>
+  <p>Chrome or Edge. They play the file straight from your disk, so files of any size work. Firefox and Safari work too, but they first copy the file into the browser's storage (needs free disk space the size of the file).</p>
 
   <h2>Skip the "click to start" screen</h2>
   <p>Browsers need one click before playing sound fullscreen. To start fully automatically (for example after a power cut), open the site in kiosk mode:</p>
@@ -44,14 +45,14 @@
   <p><b>Mac</b> — run in Terminal (or save as an Automator app and add it to Login Items):</p>
   <pre>open -na "Google Chrome" --args --kiosk --autoplay-policy=no-user-gesture-required https://YOUR-SITE.workers.dev</pre>
   <p>To exit kiosk mode: <code>Alt+F4</code> (Windows) or <code>Cmd+Q</code> (Mac).</p>
-  <p>Chrome may ask once for permission to read the video file. Choose <b>Allow on every visit</b>.</p>
+  <p>Chrome may ask once for permission to read the file. Choose <b>Allow on every visit</b>.</p>
   <p><b>Firefox</b>: click the icon left of the address → Autoplay → <i>Allow Audio and Video</i>, and press F11 for fullscreen. <b>Safari</b>: Safari → Settings for this website → Auto-Play → <i>Allow All Auto-Play</i>.</p>
 
   <h2>Exhibition checklist</h2>
   <ul>
     <li>Turn off sleep / screen saver on every computer.</li>
     <li>Turn off OS notifications (Do Not Disturb / Focus).</li>
-    <li>All computers need Wi-Fi only for sync. The video plays from the computer itself.</li>
+    <li>All computers need Wi-Fi only for sync. The video or audio plays from the computer itself.</li>
     <li>If the Wi-Fi drops, playback continues in sync on its own.</li>
   </ul>
 
@@ -73,17 +74,18 @@
 
   <h2>Cómo funciona</h2>
   <ol>
-    <li>En la computadora principal: <b>Crear sala</b>. Anotá el código de 4 caracteres. Elegí el video. Su duración define el loop.</li>
-    <li>En cada una de las otras computadoras: escribí el código de 4 caracteres, <b>Unirse</b>, y elegí el video de esa computadora.</li>
+    <li>En la computadora principal: <b>Crear sala</b>. Anotá el código de 4 caracteres. Elegí el video o audio. Su duración define el loop.</li>
+    <li>En cada una de las otras computadoras: escribí el código de 4 caracteres, <b>Unirse</b>, y elegí el archivo de esa computadora (video o audio).</li>
     <li>Un clic para empezar. Todo se repite en loop para siempre, sincronizado.</li>
-    <li>La próxima vez que abras el sitio, cada computadora vuelve sola a su sala y a su video.</li>
+    <li>La próxima vez que abras el sitio, cada computadora vuelve sola a su sala y a su archivo.</li>
   </ol>
+  <p>Los archivos de audio funcionan igual que los videos: se reproducen sincronizados sobre pantalla negra. Sirve cualquier formato que reproduzca Chrome (MP3, WAV, FLAC, OGG, Opus, AAC / M4A). Podés mezclar computadoras con video y con audio en la misma sala.</p>
   <h2>Teclas / Atajos</h2>
   <p>Mové el mouse para ver los controles. Teclas: <code>espacio</code> pausa, <code>← →</code> saltar 5 s, <code>R</code> reiniciar a todos (solo la computadora principal), <code>F</code> pantalla completa, <code>[ ]</code> retraso ±10 ms (con shift ±1 ms).</p>
   <p>Si una pantalla se ve un poco adelantada o atrasada (un televisor lento, altavoces externos), ajustá su <b>retraso</b> (DELAY) hasta que coincida.</p>
 
   <h2>Navegador</h2>
-  <p>Chrome o Edge. Reproducen el video directo desde el disco, así que funcionan archivos de cualquier tamaño. Firefox y Safari también funcionan, pero primero copian el video al almacenamiento del navegador (hace falta espacio libre del tamaño del video).</p>
+  <p>Chrome o Edge. Reproducen el archivo directo desde el disco, así que funcionan archivos de cualquier tamaño. Firefox y Safari también funcionan, pero primero copian el archivo al almacenamiento del navegador (hace falta espacio libre del tamaño del archivo).</p>
 
   <h2>Saltar la pantalla "clic para empezar"</h2>
   <p>Los navegadores piden un clic antes de reproducir con sonido en pantalla completa. Para que arranque solo (por ejemplo después de un corte de luz), abrí el sitio en modo kiosco:</p>
@@ -92,14 +94,14 @@
   <p><b>Mac</b> — ejecutá esto en Terminal (o guardalo como app de Automator y agragalo a Ítems de inicio):</p>
   <pre>open -na "Google Chrome" --args --kiosk --autoplay-policy=no-user-gesture-required https://TU-SITIO.workers.dev</pre>
   <p>Para salir del modo kiosco: <code>Alt+F4</code> (Windows) o <code>Cmd+Q</code> (Mac).</p>
-  <p>Chrome puede pedir una vez permiso para leer el archivo de video. Elegí <b>Permitir en cada visita</b>.</p>
+  <p>Chrome puede pedir una vez permiso para leer el archivo. Elegí <b>Permitir en cada visita</b>.</p>
   <p><b>Firefox</b>: clic en el ícono a la izquierda de la dirección → Reproducción automática → <i>Permitir audio y video</i>, y F11 para pantalla completa. <b>Safari</b>: Safari → Ajustes de este sitio web → Reproducción automática → <i>Permitir toda la reproducción automática</i>.</p>
 
   <h2>Checklist para la exhibición</h2>
   <ul>
     <li>Desactiva la suspensión y el protector de pantalla en todas las computadoras.</li>
     <li>Desactiva las notificaciones del sistema (No molestar / Concentración).</li>
-    <li>El Wi-Fi solo se usa para sincronizar. El video se reproduce desde cada computadora.</li>
+    <li>El Wi-Fi solo se usa para sincronizar. El video o audio se reproduce desde cada computadora.</li>
     <li>Si se corta el Wi-Fi, la reproducción sigue sincronizada sola.</li>
   </ul>
 

@@ -1,4 +1,4 @@
-// Remembering the video file between visits.
+// Remembering the media file (video or audio) between visits.
 //
 // Chrome / Edge: keep a FileSystemFileHandle in IndexedDB and read the file
 //   in place (no copy, any size). Chrome can grant read access "on every
@@ -33,13 +33,21 @@ export async function pickVideo(onProgress) {
   if (canHandle) {
     const [handle] = await showOpenFilePicker({
       id: 'easysync-video',
-      types: [{ description: 'Video', accept: { 'video/*': ['.mp4', '.m4v', '.mov', '.webm', '.mkv', '.ogv'] } }],
+      types: [
+        {
+          description: 'Video or audio',
+          accept: {
+            'video/*': ['.mp4', '.m4v', '.mov', '.webm', '.mkv', '.ogv'],
+            'audio/*': ['.mp3', '.wav', '.ogg', '.oga', '.opus', '.flac', '.m4a', '.aac', '.weba'],
+          },
+        },
+      ],
     });
     await set('video', { kind: 'handle', handle, name: handle.name });
     return handle.getFile();
   }
   const file = await new Promise((resolve, reject) => {
-    const input = Object.assign(document.createElement('input'), { type: 'file', accept: 'video/*' });
+    const input = Object.assign(document.createElement('input'), { type: 'file', accept: 'video/*,audio/*' });
     input.onchange = () => (input.files[0] ? resolve(input.files[0]) : reject(new Error('no file')));
     input.oncancel = () => reject(new DOMException('cancelled', 'AbortError'));
     input.click();
